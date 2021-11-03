@@ -1,0 +1,60 @@
+<html>
+	<body>
+		<label for="namenLijst">Ik ben </label>
+
+		<select name="namenLijst" id="namenLijst">
+		</select>
+		<button id="knop">en ik ben kerstman voor...</button>
+		<div id="res">
+			
+		</div>
+	</body>
+</html>
+<script>
+	const seed = 6969;
+	let namen = ["Yannique", "Sarah", "Quinn", "Marijke", "Jonathan", "Emma", "Eliot", "Daan"];
+	let namenCopy = JSON.parse(JSON.stringify(namen));
+	let resultaat = [];
+	const select = document.getElementById("namenLijst");
+
+	Array.prototype.shuffleMetSeed=function(seed){
+		let temp,j;
+
+		for (let i = 0; i < this.length; i++){
+			j = (seed % (i+1) + i) % this.length;
+			temp=this[i];
+			this[i]=this[j];
+			this[j]=temp;
+		}
+		
+		return this;
+	}
+	
+	namenCopy.shuffleMetSeed(seed);
+	
+	let probleem = false;
+	for (let i = 0; i < namen.length; i++) {
+		if (namen[i] == namenCopy[i]) {
+			probleem = true;
+			break;
+		}
+		resultaat.push([namen[i], namenCopy[i]]);
+	}
+	console.log(probleem);
+	if (probleem) {
+		document.body.innerHTML = "<p>slechte seed</p>";
+	} else {
+		for (let i = 0; i < resultaat.length; i++) {
+			let opt = resultaat[i][0];
+			let el = document.createElement("option");
+			el.textContent = opt;
+			el.value = opt;
+			select.appendChild(el);
+		}
+	}
+	
+	const knop = document.getElementById("knop");
+	knop.onclick = (event) => {
+		document.getElementById("res").innerHTML = "<p>" + resultaat[namenLijst.selectedIndex][1] + "</p>";
+    };
+ </script>
