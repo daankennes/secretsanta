@@ -11,11 +11,11 @@
 	</body>
 </html>
 <script>
-	const seed = 6969;
+	let seed = 6969;
 	let namen = ["Yannique", "Sarah", "Quinn", "Marijke", "Jonathan", "Emma", "Eliot", "Daan"];
 	let namenCopy = JSON.parse(JSON.stringify(namen));
 	let resultaat = [];
-	const select = document.getElementById("namenLijst");
+	let select = document.getElementById("namenLijst");
 
 	Array.prototype.shuffleMetSeed=function(seed){
 		let temp,j;
@@ -53,7 +53,7 @@
 		}
 	}
 	
-	const knop = document.getElementById("knop");
+	let knop = document.getElementById("knop");
 	knop.onclick = (event) => {
 		document.getElementById("res").innerHTML = "<p>" + resultaat[namenLijst.selectedIndex][1] + "</p>";
     };
